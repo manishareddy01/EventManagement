@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('background.jpg'); /* Replace with your background image URL */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #fff;
+            position: relative;
+        }
+
+        /* Overlay to make the text more readable */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.5); /* Adjust the alpha value for the desired overlay darkness */
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            z-index: 1; /* Ensure the text is above the overlay */
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 15px 30px;
+            font-size: 16px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            z-index: 1; /* Ensure the buttons are above the overlay */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category | default('info') }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+    <h2>Welcome to Our Event Platform</h2>
+
+    <button onclick="window.location.href='/view_events'">View or Buy Tickets</button>
+    <button onclick="window.location.href='/booking_search'">Fetch Booking Details</button>
+    <button onclick="window.location.href='/login'">Login for Organizers</button>
+    <button onclick="window.location.href='/feedback'">Feedback</button>
+</body>
+</html>

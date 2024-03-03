@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h2>Booking Details</h2>
+    <h2>Please take note of Booking Id to track the Booking Details</h2>
+    <p><strong>Booking ID:</strong> {{ booking_data['BookingId'] }}</p>
+    <p><strong>Attendee ID:</strong> {{ booking_data['CustomerName'] }}</p>
+    <p><strong>Event Name:</strong> {{ booking_data['EventName'] }}</p>
+    <p><strong>Tickets Booked:</strong> {{ booking_data['TicketQuantity'] }}</p>
+
+    <!-- We can add more details as needed -->
+
+    <p><a href="{{ url_for('view_events') }}">Back to Events</a></p>
+</body>
+</html>

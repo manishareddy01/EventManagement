@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        header span {
+            font-weight: bold;
+        }
+
+        h2 {
+            text-align: center;
+            color: #007BFF;
+            margin-top: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        td a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #fff;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        td a:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="{{ url_for('login') }}">Logout</a>
+        <span>&gt;</span>
+        <a href="{{ url_for('home') }}">Home</a>
+        <span>&gt;</span>
+        <span>Events</span>
+    </header>
+
+    <h2>Event Details</h2>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div style="margin: 10px; padding: 10px; background-color: #ffeeba; border: 1px solid #ffc107; border-radius: 5px;">
+                {% for message in messages %}
+                    {{ message }}<br>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <table>
+        <tr>
+            <th>Event ID</th>
+            <th>Event Name</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Address</th>
+            <th>Location</th>
+            <th>Organiser ID</th>
+            <th>Ticket Type</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Tickets Available</th>
+            <th>Sale Start Date</th>
+            <th>Sale End Date</th>
+            <th>Book Event</th>
+        </tr>
+        {% for event in events %}
+            <tr>
+                <td>{{ event['EventId'] }}</td>
+                <td>{{ event['EventName'] }}</td>
+                <td>{{ event['Description'] }}</td>
+                <td>{{ event['Date'] }}</td>
+                <td>{{ event['Time'] }}</td>
+                <td>{{ event['Address'] }}</td>
+                <td>{{ event['Location'] }}</td>
+                <td>{{ event['OrganiserId'] }}</td>
+                <td>{{ event['Ticket_Type'] }}</td>
+                <td>{{ event['Price'] }}</td>
+                <td>{{ event['Status'] }}</td>
+                <td>{{ event['Tickets_Available'] }}</td>
+                <td>{{ event['Sale_Start_Date'] }}</td>
+                <td>{{ event['Sale_End_Date'] }}</td>
+                <td><a href="{{ url_for('book_event', event_id=event['EventId'], ticket_type=event['Ticket_Type']) }}">Book Now</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
